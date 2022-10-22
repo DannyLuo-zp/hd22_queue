@@ -8,11 +8,11 @@ const Navbar = ()=>{
       <div class="navbar-brand">
         <a class="navbar-item">
           {/* <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28"/> */}
-          <span style={{ fontSize:"25px",fontWeight:"600"}}> App </span>
+          <span style={{ fontSize:"25px",fontWeight:"600"}}> Peek-A-Queue </span>
         </a>
         <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample" onClick={()=>setActive(1?active==0:0)}>
           <span aria-hidden="true"> </span>
-          <span aria-hidden="true"></span>
+          <span aria-hidden="true"> </span>
           <span aria-hidden="true"></span>
         </a>
       </div>

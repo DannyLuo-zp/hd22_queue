@@ -1,7 +1,8 @@
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { get_all_from_location } from '../api/queue';
 
 export const HomePage = ()=>{
     const [count,setCount] = useState(0)
@@ -11,9 +12,14 @@ export const HomePage = ()=>{
       navigate('/thank-you')
   
     }
-    
-    
-
+    const [data, setData] = useState(null); 
+    useEffect(() => {
+        get_all_from_location('MailCenter')
+        .then((data) =>{
+            console.log(data)
+            setData(data);
+        }).catch(err => alert(err));
+    }, []);
 
     return (
       <div class="hero-body">

@@ -5,6 +5,7 @@ import { AnalysisPage } from './pages/AnalysisPage';
 import { ThankYouPage } from './pages/ThankYouPage';
 import Navbar from './components/Navbar';
 import { DashboardPage } from './pages/DashboardPage';
+import { APITestPage } from './pages/APITestPage';
 
 const App = () => {
   return (
@@ -15,6 +16,7 @@ const App = () => {
         <Route  path = '/thank-you' element = {<ThankYouPage/>}/>
         <Route  path = "/" element = {<HomePage/>}/>
         <Route path = "/dashboard" element = {<DashboardPage/>}/>
+        <Route path = "/test" element = {<APITestPage/>}/>
       </Routes>
     </BrowserRouter>
     </div>

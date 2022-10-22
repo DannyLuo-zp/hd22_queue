@@ -4,8 +4,10 @@ Hackduke 2022 Project. A Web app aiming to facilitate on-campus queueing process
 
 ## Set up
 
-```sh
-cd [repo-name]
-npm install
-npm start
-```
+- Install Node.js and npm
+- start development server
+    ```sh
+    cd [repo-name]/app
+    npm install
+    npm start
+    ```

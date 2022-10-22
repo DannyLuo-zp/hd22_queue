@@ -1,12 +1,12 @@
 import { useState } from "react";
 
 export const Realtime = () => {
-    var lowerBound = 10;
+    const [lowerBound, setlowerBound] = useState(0);
 
     const update = () => {
         console.log("fetch latest data from database");
         console.log("execute algorithm to determine the return value");
-        lowerBound = lowerBound + 1;
+        setlowerBound(lowerBound + 1);
     }
 
     return (

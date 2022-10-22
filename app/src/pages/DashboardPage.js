@@ -12,6 +12,7 @@ import {
   } from "recharts";
 
 import { Realtime } from "../components/Realtime";
+import { Chart } from "../components/Chart";
 
 export const DashboardPage = ()=>{
     const data = [
@@ -112,18 +113,7 @@ export const DashboardPage = ()=>{
 
                 <span class = "subtitle ml-6">Traffic By Day of Week</span>
                 <div class ="mb-3"></div>
-                <ResponsiveContainer width="80%" height="80%">
-                <LineChart width="100%" height="100%" data={data}
-                    margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="Hour" style={{fontSize:"10px"}}/>
-                    <YAxis style={{fontSize:"10px"}}/>
-                    <Tooltip />
-                    <Legend style={{fontSize:"10px"}}/>
-                    <Line name = "Bryan Center Mailroom" type="monotone" dataKey="QueueLength" stroke="#8884d8" />
-                    {/* <Line type="monotone" dataKey="uv" stroke="#82ca9d" /> */}
-                </LineChart>
-                </ResponsiveContainer>
+                <Chart data={data}/>
             </div>
             </div>
         </div>

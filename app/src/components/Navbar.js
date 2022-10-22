@@ -24,8 +24,8 @@ const Navbar = ()=>{
               Home
             </a>
       
-            <a class="navbar-item" href='Analysis'>
-              Analysis
+            <a class="navbar-item" href='/dashboard'>
+              Dashboard
             </a>
       </div>
         )
@@ -38,8 +38,8 @@ const Navbar = ()=>{
             Home
           </a>
     
-          <a class="navbar-item" href='Analysis'>
-            Analysis
+          <a class="navbar-item" href='/dashboard'>
+            Dashboard
           </a>
     
           <div class="navbar-item has-dropdown is-hoverable">

@@ -1,16 +1,20 @@
 
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 export const HomePage = ()=>{
     const [count,setCount] = useState(0)
     const navigate = useNavigate()
     const handle_submit = ()=>{
       //call backend API
-  
       navigate('/thank-you')
   
     }
+    
+    
+
+
     return (
       <div class="hero-body">
         <div class="container">

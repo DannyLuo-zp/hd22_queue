@@ -1,10 +1,13 @@
 
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams, Outlet } from 'react-router-dom';
 import axios from 'axios';
 
-export const HomePage = ()=>{
-    const [count,setCount] = useState(0)
+export const HomePage = (props)=>{
+    const checkpoint = useParams()
+    console.log(checkpoint)
+
+    const [count,setCount] = useState(checkpoint['checkpoint'] * 10)
     const navigate = useNavigate()
     const handle_submit = ()=>{
       //call backend API
@@ -17,6 +20,7 @@ export const HomePage = ()=>{
 
     return (
       <div class="hero-body">
+        <Outlet />
         <div class="container">
           <div class="columns is-multiline is-mobile is-centered">
   

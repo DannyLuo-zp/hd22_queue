@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { add_record, get_all_from_location } from "../api/queue";
+import { add_record, get_all_from_location,add_record_gen } from "../api/queue";
+import {gen_data} from "../data/data_gen";
 
 export const APITestPage = ()=>{
     const [datalist, setDatalist] = useState([]); 
@@ -13,6 +14,14 @@ export const APITestPage = ()=>{
         }).catch(err => alert(err));
     }, []);
 
+    const handle_gen = ()=>{
+        const l = gen_data()
+        l.forEach(
+            entry=>{
+                add_record_gen(entry[0],entry[1],entry[2],entry[3])
+            }
+        )
+    }
     return (
         <div class="hero-body">
             <div class="container">
@@ -29,7 +38,7 @@ export const APITestPage = ()=>{
                             <span>{item.TimeStamp.getDate()}</span> 
                         </li>
                     ))}
-                    <a class = "button" onClick={()=>add_record('MailCenter','zl230',10)}>Generate</a>
+                    {/* <a class = "button" onClick={handle_gen}>Generate</a> */}
             
                 </div>
 

@@ -52,3 +52,13 @@ export async function has_previous_submission(location,net_id){
             
 }
 
+export async function add_record_gen(location,net_id,queue_len,ts){
+    const docData = {
+        NetID: net_id,
+        QueueLength:queue_len,
+        TimeStamp: ts
+    };
+    console.log("data added"+docData)
+    await db.collection(location).add(docData);
+
+}

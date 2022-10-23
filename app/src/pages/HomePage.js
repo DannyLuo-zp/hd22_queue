@@ -1,19 +1,18 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams, Outlet } from 'react-router-dom';
 import axios from 'axios';
-import { get_all_from_location } from '../api/queue';
+import { add_record, get_all_from_location } from '../api/queue';
 
 export const HomePage = (props)=>{
     const checkpoint = useParams()
     console.log(checkpoint)
 
-    const upperbound = checkpoint['checkpoint'] * 10
     const [count,setCount] = useState(checkpoint['checkpoint'] * 10)
     const navigate = useNavigate()
-    const handle_submit = ()=>{
-      //call backend API
-      navigate('/thank-you')
-  
+    function handle_submit(){
+      let text;
+      let user_netID = prompt("Thank you! Please enter your netID to record your contribution.", "ab123")
+      add_record('MailCenter', user_netID, count)
     }
     const [data, setData] = useState(null); 
     useEffect(() => {
@@ -40,7 +39,14 @@ export const HomePage = (props)=>{
             <center><div class = "is-flex is-justify-content-center is-flex-direction-column">
               <div class = "field is-grouped is-flex is-justify-content-center">
                 <p class = "control is-justify-content-center">
-                  <span class = "title ">{count}</span>
+                <input
+                aria-label="data-input"
+                value={count}
+                onChange={(e) => setCount(e.target.value)}
+                type="number"
+                id="new_count"
+                />
+                  {/* <span class = "title ">{count}</span> */}
                 </p>
                 <p class = "control is-justify-content-center">
                   <img src = "https://cdn.dribbble.com/users/740477/screenshots/6549643/pikachurundrib.gif" width = "50px" height = "40px" />
@@ -55,10 +61,10 @@ export const HomePage = (props)=>{
               <div class = "is-flex is-justify-content-center ">
                 <div class = "field is-grouped">
                   <p class = "control">
-                    <button class = "button is-success is-medium " style = {{ background: "#F6CF57"}} onClick={()=>setCount(count<upperbound?count+1:upperbound)}>+1</button>
+                    <button class = "button is-success is-medium " style = {{ background: "#F6CF57"}} onClick={()=>setCount(parseInt(count)+1)}>+1</button>
                   </p>
                   <p class = "control">
-                    <button class = "button is-success is-medium " style = {{ background: "#F6CF57"}} onClick={()=>setCount(count>upperbound-10?count-1:upperbound-10)}>-1</button>
+                    <button class = "button is-success is-medium " style = {{ background: "#F6CF57"}} onClick={()=>setCount(count>0?parseInt(count)-1:0)}>-1</button>
                   </p>
                 </div>
               </div>
@@ -69,7 +75,6 @@ export const HomePage = (props)=>{
                 <button class = "button is-success is-large " style = {{ background: "#F6CF57"}} onClick={handle_submit}>Submit</button>
               </div>
             </div>
-  
   
             
   

@@ -16,11 +16,12 @@ export const APITestPage = ()=>{
 
     const handle_gen = ()=>{
         const l = gen_data()
-        l.forEach(
-            entry=>{
-                add_record_gen(entry[0],entry[1],entry[2],entry[3])
-            }
-        )
+
+        // l.forEach(
+        //     entry=>{
+        //         add_record_gen(entry[0],entry[1],entry[2],entry[3])
+        //     }
+        // )
     }
     return (
         <div class="hero-body">
@@ -38,7 +39,7 @@ export const APITestPage = ()=>{
                             <span>{item.TimeStamp.getDate()}</span> 
                         </li>
                     ))}
-                    {/* <a class = "button" onClick={handle_gen}>Generate</a> */}
+                    <a class = "button" onClick={handle_gen}>Generate</a>
             
                 </div>
 

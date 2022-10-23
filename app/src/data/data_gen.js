@@ -33,27 +33,28 @@ const get_queue_len = (h)=>{
     return hour_len[h]
 }
 
+// data format: arr of length 140
+// each element: ["MailCenter",netid,queuelength,TimeStamp Js object]
 export const gen_data = ()=>{
+    // 7 d * 10 h * 2 t 
     var l=[]
     var id_list = ['zl230','ab123','cd456']
-    const t = firebase.firestore.Timestamp.fromDate(new Date());
-    var n_month = 1
-    var n_day = 30
+    
+    var n_day = 7
     var hours = [9,10,11,12,13,14,15,16,17,18]
-    var n_min = 60
-    for(let month = 0;month<n_month;month++){
-        for(let day = 0;day<n_day;day++){
-            hours.forEach(h=>{
-                for(let min=0;min<n_min;min++){
-                    if(prob(h)){
-                        var date = new Date(2022,month,day,h,min)
-                        // create a new record
-                        var record = ["MailCenter",id_list[0],get_queue_len(h),date]
-                        l.push(record)
-                    }
-                }
-            })
+    for(let day = 0;day<n_day;day++){
+        hours.forEach(h=>{
+            var date1 = new Date(2022,10,day,h,2)
+            // const t1 = firebase.firestore.Timestamp.fromDate(date1);
+            var record1 = ["MailCenter",id_list[0],get_queue_len(h),date1]
+            l.push(record1)
+
+            var date2 = new Date(2022,10,day,h,58)
+            // const t2 = firebase.firestore.Timestamp.fromDate(date2);
+            var record2 = ["MailCenter",id_list[0],get_queue_len(h)-5,date2]
+            l.push(record2)
+
+        })
         }
-    }
     return l
 }

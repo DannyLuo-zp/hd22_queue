@@ -18,7 +18,7 @@ export async function get_all_from_location(location){
               list.push(data);
             });
           });
-          
+          console.log(list)
         return list;
       } catch (error) {
         return error;
@@ -33,5 +33,22 @@ export async function add_record(location,net_id,queue_len){
     };
     await db.collection(location).add(docData);
 
-
 }
+
+export async function has_previous_submission(location,net_id){
+    try {
+        var list = []
+        var ret = await db.collection(location).where("NetID", "==", net_id).get()
+        ret.forEach((doc)=> {
+            var data = doc.data();
+          //   data.TimeStamp = data.TimeStamp.toDate()
+            data.TimeStamp = data.TimeStamp.toDate()
+            list.push(data);
+          });
+        return list
+    } catch (error) {
+        return error;
+    }
+            
+}
+

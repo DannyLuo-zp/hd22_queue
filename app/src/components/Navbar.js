@@ -27,6 +27,10 @@ const Navbar = ()=>{
             <a class="navbar-item" href='/dashboard'>
               Dashboard
             </a>
+
+            <a class = "navbar-item" onClick={()=>window.localStorage.clear()}>
+              Clear Browser Cache
+            </a>
       </div>
         )
       }

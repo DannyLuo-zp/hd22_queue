@@ -18,7 +18,6 @@ export async function get_all_from_location(location){
               list.push(data);
             });
           });
-          console.log(list)
         return list;
       } catch (error) {
         return error;

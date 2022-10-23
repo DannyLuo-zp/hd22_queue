@@ -1,11 +1,17 @@
 import { useState } from "react";
+import { get_all_from_location } from '../api/queue'
 
 export const Realtime = () => {
     const [lowerBound, setlowerBound] = useState(0);
 
     const update = () => {
-        console.log("fetch latest data from database");
-        console.log("execute algorithm to determine the return value");
+        var data;
+        get_all_from_location('MailCenter')
+        .then((res) =>{
+          data = res;
+        }).catch(err => alert(err));
+
+        
         setlowerBound(lowerBound + 1);
     }
 

@@ -19,7 +19,7 @@ const Navbar = ()=>{
   
       {
         active==1&&(
-          <div style={{position:"absolute",left:"0",height:"300px",width:"100%",top:"50px",background:"white",overflow:"auto"}}>
+          <div style={{position:"absolute",left:"0",height:"200px",width:"100%",top:"50px",background: "white",overflow:"auto"}}>
             <a class="navbar-item" href='/'>
               Home
             </a>

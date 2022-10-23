@@ -56,6 +56,5 @@ export const gen_data = ()=>{
 
         })
         }
-    console.log(l)
     return l
 }

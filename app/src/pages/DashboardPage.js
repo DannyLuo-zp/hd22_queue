@@ -1,25 +1,43 @@
-import {
-    ResponsiveContainer,
-    AreaChart,
-    Area,
-    XAxis,
-    YAxis,
-    Tooltip,
-    CartesianGrid,
-    LineChart,
-    Line,
-    Legend,
-  } from "recharts";
-
-
 import { Realtime } from "../components/Realtime";
 import { Chart } from "../components/Chart";
 import { useEffect, useState } from "react";
-import {  has_previous_submission } from "../api/queue";
+import {  has_previous_submission, get_all_from_location } from "../api/queue";
+
+const filterData = (day, data) => {
+  console.log("filterData received:");
+  console.log(data);
+  var current;
+  const ret = [];
+  data.sort(function(a,b){
+    return a.TimeStamp-b.TimeStamp;
+  })
+  for (var i = 0; i < data.length; i++) {
+    if (data.TimeStamp.getDay() == day) {
+      current = data[i].TimeStamp;
+      break;
+    }
+  }
+  const arr = [9, 10, 11, 12, 13, 14, 15, 16, 17]
+  for (var i = 0; i < arr.length; i ++) {
+    var length = 0;
+    for (var j = 0; j < data.length; j++) {
+      if (data[j].TimeStamp == current && data[j].TimeStamp.getHours() == arr[i]) {
+        if (data[j].QueueLength > length) {
+          length = data.QueueLength;
+        }
+      }
+    }
+    ret.push({"Hour": "" + arr[i],"QueueLength": length});
+    console.log("In filter data:" + ret)
+  }
+  return ret;
+}
 
 const ChooseDate = (props) => {
   const dates = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
-  const filter = () => {return {"Day": "Tuesday","Hour": "19:00","QueueLength": 120}}
+  // ChooseDate component give each date button a corresponding filterData call
+  // so that when a date button is called, it process raw data into the data needed
+  // by the chart and set the data with hook. This re-renders the chart. 
   return (
     <div class="dropdown is-hoverable">
     <div class="dropdown-trigger">
@@ -33,7 +51,9 @@ const ChooseDate = (props) => {
     <div class="dropdown-menu" id="dropdown-menu3" role="menu">
       <div class="dropdown-content">
         {
-          dates.map(res => <a href="#" onClick={()=>{props.setData(filter(dates.indexOf(res)))}} class="dropdown-item">{res}</a>)
+          dates.map(res => <a href="#" onClick={()=>{
+            props.setData(filterData(dates.indexOf(res), props.rawData))
+          }} class="dropdown-item">{res}</a>)
         }
       </div>
     </div>
@@ -42,15 +62,25 @@ const ChooseDate = (props) => {
 }
 
 const DashBoard = (props)=>{
-
   const [data, setData] = useState({"Day": "Monday","Hour": "9:00","QueueLength": 30})  
+  const [rawData, setRawData] = useState({"Day": "Monday","Hour": "9:00","QueueLength": 30})  
+
+  // After passing user auth, make a call to backend to retrieve raw data
+  // Set raw data and pass it into choseData component
+  useEffect(() => {
+    get_all_from_location('MailCenter')
+    .then((res) =>{
+      setRawData(res)
+    }).catch(err => alert(err));
+  }, []);
+
   return (
     <div>
       {/* <button class = "button" onClick={()=>{window.localStorage.clear()}}>Clear Browswer Cache</button> */}
       <Realtime />
       <div class="columns is-multiline is-mobile is-centered mt-6">
           <div class = "column is-full ml-6" style={{height:"300px",width:"500pxs"}}>
-            <ChooseDate setData={setData}/>
+            <ChooseDate setData={setData} rawData={rawData}/>
             <span class = "subtitle ml-6">Traffic By Day of Week</span>
             <Chart data={data}/>
         </div>

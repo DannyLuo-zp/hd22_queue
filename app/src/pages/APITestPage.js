@@ -26,7 +26,7 @@ export const APITestPage = ()=>{
                         <li key={item.NetID}>
                             <span>{item.NetID}</span>
                             <span>{item.QueueLength}</span> 
-                            <span>{item.TimeStamp.toUTCString()}</span> 
+                            <span>{item.TimeStamp.getDate()}</span> 
                         </li>
                     ))}
                     <a class = "button" onClick={()=>add_record('MailCenter','zl230',10)}>Generate</a>

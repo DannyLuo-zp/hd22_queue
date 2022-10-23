@@ -17,6 +17,9 @@ const prob=(h)=>{
     let prob = hour_distribution[h]
     return Math.random() < prob;
 }
+const random = ()=>{
+    return Math.floor(Math.random()*10)
+}
 const get_queue_len = (h)=>{
     const hour_len = {
         9:10,
@@ -46,12 +49,12 @@ export const gen_data = ()=>{
         hours.forEach(h=>{
             var date1 = new Date(2022,10,day,h,2)
             // const t1 = firebase.firestore.Timestamp.fromDate(date1);
-            var record1 = ["MailCenter",id_list[0],get_queue_len(h),date1]
+            var record1 = ["MailCenter",id_list[0],get_queue_len(h)+day+random(),date1]
             l.push(record1)
 
             var date2 = new Date(2022,10,day,h,58)
             // const t2 = firebase.firestore.Timestamp.fromDate(date2);
-            var record2 = ["MailCenter",id_list[0],get_queue_len(h)-5,date2]
+            var record2 = ["MailCenter",id_list[0],get_queue_len(h)-5+day+random(),date2]
             l.push(record2)
 
         })

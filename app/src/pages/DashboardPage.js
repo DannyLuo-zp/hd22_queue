@@ -5,6 +5,7 @@ import {  has_previous_submission, get_all_from_location } from "../api/queue";
 import { gen_data } from '../data/data_gen'
 
 const filterData = (day, data) => {
+  console.log(data[1])
   var current;
   const ret = [];
   data.sort(function(a,b){
@@ -21,15 +22,16 @@ const filterData = (day, data) => {
   for (var i = 0; i < arr.length; i ++) {
     var length = 0;
     for (var j = 0; j < data.length; j++) {
-      if (data[j].TimeStamp == current && data[j].TimeStamp.getHours() == arr[i]) {
-        if (data[j].QueueLength > length) {
-          length = data.QueueLength;
+      if (data[j][3].getDay() == current.getDay() && data[j][3].getHours() == arr[i]) {
+        if (data[j][2] > length) {
+          length = data[j][2];
         }
       }
     }
     ret.push({"Hour": "" + arr[i],"QueueLength": length});
   }
-  console.log("In filter data:" + ret)
+  console.log("In filter data:")
+  console.log(ret)
   return ret;
 }
 

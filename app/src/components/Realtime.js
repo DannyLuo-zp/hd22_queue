@@ -19,13 +19,14 @@ export const Realtime = () => {
     }
 
     return (
-        <div>
+        <div class = "p-4" style = {{width:"390px"}}>
+            <h4 class = "subtitle is-6" style = {{fontWeight:"800"}}>Real Time Queue</h4>
+
             <p>There are at least {lowerBound} people waiting in line.</p>
             <p>You need to wait approximately {lowerBound * 2} minutes.</p>
             <div class = "column is-two-thirds">
-            <span class="ms-font-su ms-fontColor-themePrimary">Big blue text</span>
               <div class = "is-flex is-justify-content-center ">
-                <button class = "button is-success is-large " onClick={update}>Refresh</button>
+                <button class = "button is-success"style = {{ background: "#F6CF57"}} onClick={update}>Refresh</button>
               </div>
             </div>
         </div>

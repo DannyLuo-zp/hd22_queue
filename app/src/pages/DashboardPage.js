@@ -42,24 +42,24 @@ const ChooseDate = (props) => {
   // by the chart and set the data with hook. This re-renders the chart. 
   return (
     <div class="dropdown is-hoverable">
-    <div class="dropdown-trigger">
-      <button class="button" aria-haspopup="true" aria-controls="dropdown-menu3">
-        <span>View other dates</span>
-        <span class="icon is-small">
-          <i class="fas fa-angle-down" aria-hidden="true"></i>
-        </span>
-      </button>
-    </div>
-    <div class="dropdown-menu" id="dropdown-menu3" role="menu">
-      <div class="dropdown-content">
-        {
-          dates.map(res => <a href="#" onClick={()=>{
-            props.setData(filterData(dates.indexOf(res), props.rawData))
-          }} class="dropdown-item">{res}</a>)
-        }
+      <div class="dropdown-trigger">
+        <button class="button" aria-haspopup="true" aria-controls="dropdown-menu3">
+          <span>View other dates</span>
+          <span class="icon is-small">
+            <i class="fas fa-angle-down" aria-hidden="true"></i>
+          </span>
+        </button>
+      </div>
+      <div class="dropdown-menu" id="dropdown-menu3" role="menu">
+        <div class="dropdown-content">
+          {
+            dates.map(res => <a href="#" onClick={()=>{
+              props.setData(filterData(dates.indexOf(res), props.rawData))
+            }} class="dropdown-item">{res}</a>)
+          }
+        </div>
       </div>
     </div>
-  </div>
   );
 }
 
@@ -73,15 +73,21 @@ const DashBoard = (props)=>{
   }, []);
 
   return (
-    <div>
-      {/* <button class = "button" onClick={()=>{window.localStorage.clear()}}>Clear Browswer Cache</button> */}
+    <div class = "container is-flex is-flex-direction-column is-align-items-center mt-6">
       <Realtime />
-      <div class="columns is-multiline is-mobile is-centered mt-6">
-          <div class = "column is-full ml-6" style={{height:"300px",width:"500pxs"}}>
+      <div class = "p-4" style = {{width:"390px"}}>
+          <h4 class = "subtitle is-6" style = {{fontWeight:"800"}}>Queue Insight</h4>
+          <div class = "mb-4">
+            <span>Choose Date:</span>
+            <span class="p-4">  </span>
             <ChooseDate setData={setData} rawData={rawData}/>
-            <span class = "subtitle ml-6">Traffic By Day of Week</span>
+          </div>
+          
+          <span class = "subtitle ml-6 is-6">Traffic By Day of Week</span>
+          <div class = "container" style={{height:"300px",width:"100%"}}>
             <Chart data={data}/>
-        </div>
+          </div>
+          
       </div>
     </div>
   )

@@ -39,8 +39,10 @@ export const HomePage = (props)=>{
               <div class = "field is-grouped is-flex is-justify-content-center">
                 <p class = "control is-justify-content-center">
                 <input
+                class = "input "
                 aria-label="data-input"
                 value={count}
+                style = {{width:"80px"}}
                 onChange={(e) => setCount(e.target.value)}
                 type="number"
                 id="new_count"

@@ -4,6 +4,13 @@ import { useEffect, useState } from "react";
 import {  has_previous_submission, get_all_from_location } from "../api/queue";
 import { gen_data } from '../data/data_gen'
 
+const filterCurrData = (data) => {
+  const curr = new Date();
+  data.sort(function(a,b){
+    return b[3]-a[3];
+  })
+  return data[0];
+}
 const filterData = (day, data) => {
   console.log(data[1])
   var current;
@@ -74,7 +81,7 @@ const DashBoard = (props)=>{
 
   return (
     <div class = "container is-flex is-flex-direction-column is-align-items-center mt-6">
-      <Realtime />
+      <Realtime rawData={rawData} filterCurrData={filterCurrData}/>
       <div class = "p-4" style = {{width:"390px"}}>
           <h4 class = "subtitle is-6" style = {{fontWeight:"800"}}>Queue Insight</h4>
           <div class = "mb-4">

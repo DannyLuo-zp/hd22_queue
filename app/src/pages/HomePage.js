@@ -16,11 +16,10 @@ export const HomePage = (props)=>{
     }
     const [data, setData] = useState(null); 
     useEffect(() => {
-        get_all_from_location('MailCenter')
-        .then((data) =>{
-            console.log(data)
-            setData(data);
-        }).catch(err => alert(err));
+      if (!("checkpoint" in checkpoint)){
+        setCount(0)
+      }
+
     }, []);
 
     return (
